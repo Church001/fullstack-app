@@ -79,7 +79,7 @@ router.post('/login', (req, res) => {
             }
 
             // check password
-            // I could use bcrypt if it was working
+            // I could use bcrypt if it was working, but no
             if(password === user.password){
                 // we generate token here
                 res.json({msg: "success"})
