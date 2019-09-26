@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose'); // importing mongoose, ,used for connecting server to mongoDB
+const bodyParser = require('body-parser')
 
 const users = require('./routes/api/users'); // importing users route
 const profile = require('./routes/api/profile'); // importing profile route
@@ -10,11 +11,15 @@ const db = require('./config/keys').mongoURI; //importing config file
 
 // connect to mongoDB
 mongoose
-    .connect(db)
-    .then(() => console.log("MongoDB connected"))
-    .catch(err => console.log(err))
+.connect(db)
+.then(() => console.log("MongoDB connected"))
+.catch(err => console.log(err))
 
 const app = express();// creating an instance of express app
+
+// BodyParser middleware
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 
 app.get('/', 
     (req, res) => res.send("Hello!!!")
