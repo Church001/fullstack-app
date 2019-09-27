@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose'); // importing mongoose, ,used for connecting server to mongoDB
 const bodyParser = require('body-parser')
-
+const passport = require('passport')
 const users = require('./routes/api/users'); // importing users route
 const profile = require('./routes/api/profile'); // importing profile route
 const posts = require('./routes/api/posts'); // importing posts route
@@ -16,6 +16,12 @@ mongoose
 .catch(err => console.log(err))
 
 const app = express();// creating an instance of express app
+
+// Passport middleware
+app.use(passport.initialize())
+
+// Passport config file
+require('./config/passport')(passport)
 
 // BodyParser middleware
 app.use(bodyParser.urlencoded({extended: false}))
